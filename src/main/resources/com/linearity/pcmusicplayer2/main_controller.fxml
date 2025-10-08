@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import com.linearity.pcmusicplayer2.ColoredProgressSlider?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane fx:id="allContainer"
+          xmlns="http://javafx.com/javafx/17.0.12"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.linearity.pcmusicplayer2.SongListController"
+          style="-fx-background-color: #39c5bb;"
+          prefWidth="400"
+          prefHeight="600"
+>
+    <columnConstraints>
+        <ColumnConstraints percentWidth="30"/>
+        <ColumnConstraints percentWidth="70"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="100"/>
+    </rowConstraints>
+
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+
+    <GridPane
+            minHeight="0"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="0"
+            fx:id="leftContainer"
+            styleClass="bg_transparent"
+    >
+
+        <rowConstraints>
+            <RowConstraints percentHeight="5"/>
+            <RowConstraints percentHeight="95" />
+        </rowConstraints>
+        <columnConstraints>
+            <ColumnConstraints percentWidth="95"/>
+            <ColumnConstraints percentWidth="5"/>
+        </columnConstraints>
+
+        <GridPane
+                GridPane.rowIndex="0"
+                GridPane.columnIndex="0"
+                fx:id="titleBarContainer"
+                styleClass="bg_teal700"
+        >
+            <rowConstraints>
+                <RowConstraints percentHeight="100"/>
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="90"/>
+                <ColumnConstraints percentWidth="10"/>
+            </columnConstraints>
+            <Label
+                    GridPane.rowIndex="0"
+                    GridPane.columnIndex="0"
+                    fx:id="titleText"
+                    text="musicPlayer">
+                <font>
+                    <Font size="24"/>
+                </font>
+            </Label>
+            <Label
+                    fx:id="addSongList"
+                    GridPane.rowIndex="0"
+                    GridPane.columnIndex="1"
+                    text="+">
+                <font>
+                    <Font size="24"/>
+                </font>
+            </Label>
+        </GridPane>
+        <ListView
+                GridPane.rowIndex="1"
+                GridPane.columnIndex="0"
+                style="-fx-border-width: 0 0 0 0;"
+                styleClass="bg_transparent"
+                fx:id="songListContainerMain"
+        >
+
+        </ListView>
+    </GridPane>
+
+    <GridPane
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="0"
+            fx:id="musicPlayerContainer"
+            minHeight="0"
+    >
+        <columnConstraints>
+            <ColumnConstraints percentWidth="100"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="5"/>
+            <RowConstraints percentHeight="95"/>
+        </rowConstraints>
+        <VBox
+            styleClass="bg_teal700"
+            GridPane.rowIndex="0"
+            GridPane.columnIndex="0"
+            fx:id="searchBarContainer"
+
+            minHeight="0"
+        >
+
+            <TextField
+                    fx:id="searchbar"
+                    promptText="Search..."
+                    styleClass="bg_transparent"
+                    style="
+                    -fx-background-color: transparent;
+                -fx-border-width: 0 0 2px 0;
+                -fx-border-radius: 0px;
+                -fx-border-color: #808080;"
+                    minHeight="0"
+            >
+                <font>
+                    <Font size="16"/>
+                </font>
+            </TextField>
+        </VBox>
+        <GridPane
+                GridPane.rowIndex="1"
+                minHeight="0"
+        >
+            <columnConstraints>
+                <ColumnConstraints percentWidth="100"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="70"/>
+                <RowConstraints percentHeight="30"/>
+            </rowConstraints>
+            <GridPane
+                    minHeight="0"
+                    GridPane.rowIndex="0"
+                    fx:id="songsScrolls">
+                <rowConstraints>
+                    <RowConstraints percentHeight="0"/>
+                    <RowConstraints percentHeight="100"/>
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="100"/>
+                </columnConstraints>
+                <GridPane
+                        minHeight="0"
+                        GridPane.rowIndex="0"
+                        GridPane.columnIndex="0"
+                        fx:id="searchedContainer">
+
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="10"/>
+                        <ColumnConstraints percentWidth="80"/>
+                        <ColumnConstraints percentWidth="10"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints percentHeight="100"/>
+                    </rowConstraints>
+                    <VBox
+                            minHeight="0"
+                            GridPane.columnIndex="0"
+                            styleClass="bg_teal700"
+                    >
+                    </VBox>
+                    <ListView
+                            minHeight="0"
+                            GridPane.columnIndex="1"
+                            fx:id="searchedContainerMain"
+                            styleClass="bg_transparent"
+
+                    >
+
+                    </ListView>
+                    <VBox
+                            minHeight="0"
+                            GridPane.columnIndex="2"
+                            styleClass="bg_teal700"
+                    >
+                    </VBox>
+                </GridPane>
+                <ListView
+
+                        GridPane.rowIndex="1"
+                        GridPane.columnIndex="0"
+                        fx:id="songsContainerMain"
+                        styleClass="bg_transparent"
+
+                >
+                </ListView>
+            </GridPane>
+
+            <GridPane
+                    minHeight="0"
+                    style="-fx-background-color: #01878680;"
+                    GridPane.rowIndex="1"
+                    fx:id="playerController"
+            >
+                <rowConstraints>
+                    <RowConstraints percentHeight="10"/>
+                    <RowConstraints percentHeight="5"/>
+                    <RowConstraints percentHeight="10"/>
+                    <RowConstraints percentHeight="75"/>
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="100"/>
+                </columnConstraints>
+
+                <GridPane
+                        minHeight="0"
+                        GridPane.rowIndex="2"
+                        GridPane.columnIndex="0"
+                        fx:id="progressBarContainer"
+
+                    >
+
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="15"/>
+                        <ColumnConstraints percentWidth="70"/>
+                        <ColumnConstraints percentWidth="15"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints percentHeight="100"/>
+                    </rowConstraints>
+                    <HBox
+                            alignment="CENTER"
+                            GridPane.rowIndex="0"
+                            GridPane.columnIndex="0"
+                    >
+                        <Label
+                                fx:id="timerText"
+                                text="0:00">
+                            <font>
+                                <Font size="12"/>
+                            </font>
+                        </Label>
+                    </HBox>
+                    <stylesheets>
+                        <URL value="@slider.css"/>
+                    </stylesheets>
+                    <ColoredProgressSlider
+                            GridPane.columnIndex="1"
+                            GridPane.rowIndex="0"
+                            fx:id="player_progressbar"
+                            styleClass="transparent-slider"
+                            max="1000"
+                            value="500"
+                            progressedColor="#39c5bb"
+                            remainingColor="#AAAAAA80"
+                    />
+                    <HBox
+                            alignment="CENTER"
+                            GridPane.rowIndex="0"
+                            GridPane.columnIndex="2">
+                        <Label
+                                fx:id="totalTimeText"
+                                text="0:00">
+                            <font>
+                                <Font size="12"/>
+                            </font>
+                        </Label>
+                    </HBox>
+                </GridPane>
+                <GridPane
+                        GridPane.rowIndex="3"
+                        GridPane.columnIndex="0"
+                >
+                    <rowConstraints>
+                        <RowConstraints percentHeight="100"/>
+                    </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="20"/>
+                        <ColumnConstraints percentWidth="80"/>
+                    </columnConstraints>
+                    <GridPane
+                            GridPane.columnIndex="0"
+                            GridPane.rowIndex="0"
+                            fx:id="control_panel"
+                            minHeight="0"
+                        >
+
+                        <rowConstraints>
+                            <RowConstraints percentHeight="8"/>
+                            <RowConstraints percentHeight="40"/>
+                            <RowConstraints percentHeight="4"/>
+                            <RowConstraints percentHeight="40"/>
+                            <RowConstraints percentHeight="8"/>
+                        </rowConstraints>
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="5"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="5"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="5"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="5"/>
+                        </columnConstraints>
+                        <HBox
+                                GridPane.columnIndex="5"
+                                GridPane.rowIndex="3"
+                                alignment="CENTER"
+                                fx:id="control_panel_grid_item"
+                                minHeight="0"
+                                minWidth="0"
+                            />
+                        <HBox
+                                GridPane.columnIndex="1"
+                                GridPane.rowIndex="1"
+                                alignment="CENTER"
+                                fx:id="prev_song"
+                                minHeight="0"
+                                minWidth="0"
+                        >
+
+                            <ImageView
+                                    fx:id="prev_song_image_container"
+                            >
+                                <Image url="@icons/prevsong.png"
+                                       preserveRatio="true"
+                                       fx:id="prev_song_image"/>
+                            </ImageView>
+                        </HBox>
+                        <GridPane
+
+                                GridPane.columnIndex="3"
+                                GridPane.rowIndex="1"
+                                alignment="CENTER"
+                                minHeight="0"
+                                minWidth="0"
+                                fx:id="pause_resume"
+                                
+                        >
+
+                            <ImageView
+                                    fx:id="pause_resume_image_container"
+                            />
+                        </GridPane>
+
+                        <HBox
+                                GridPane.columnIndex="5"
+                                GridPane.rowIndex="1"
+                                alignment="CENTER"
+                                minHeight="0"
+                                minWidth="0"
+                                fx:id="next_song"
+                                
+                        >
+
+                            <ImageView
+                                    fx:id="next_song_image_container"
+                                    rotate="180"
+                            >
+                                <Image url="@icons/prevsong.png"
+                                       fx:id="next_song_image"
+                                preserveRatio="true"/>
+                            </ImageView>
+                        </HBox>
+
+                        <HBox
+
+                                GridPane.columnIndex="1"
+                                GridPane.rowIndex="3"
+                                alignment="CENTER"
+                                minHeight="0"
+                                minWidth="0"
+                                fx:id="change_playmode"
+                                
+                        >
+
+                            <ImageView
+                                    fx:id="change_playmode_image_container"
+                            >
+                                <Image url="@icons/playmode_ordered.png"
+                                fx:id="change_playmode_image"
+                                       preserveRatio="true"/>
+                            </ImageView>
+                        </HBox>
+                    </GridPane>
+                    <GridPane
+                            GridPane.columnIndex="1"
+                            fx:id="info_panel"
+                    >
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="40"/>
+                            <ColumnConstraints percentWidth="60"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints percentHeight="100"/>
+                        </rowConstraints>
+                        <GridPane
+                                fx:id="song_image_view_container"
+                                minWidth="0"
+                                minHeight="0"
+                            GridPane.rowIndex="0"
+                            GridPane.columnIndex="0">
+                            <ImageView preserveRatio="true" fx:id="song_image_view"/>
+                        </GridPane>
+                        <GridPane
+                                minWidth="0"
+                                minHeight="0"
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="1">
+
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="100"/>
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints percentHeight="70"/>
+                                    <RowConstraints percentHeight="30"/>
+                                </rowConstraints>
+                            <TextField
+                                    fx:id="song_name_text"
+                                    GridPane.columnIndex="0"
+                                    GridPane.rowIndex="0"
+                                    editable="false"
+                                    styleClass="bg_transparent"
+                                    style="
+                                        -fx-background-color: transparent;
+                                    -fx-border-width: 0 0 0 0;
+                                    -fx-border-radius: 0px;
+                                    -fx-border-color: transparent;"
+                                    minHeight="0"
+                            >
+                                <font>
+                                    <Font size="16"/>
+                                </font>
+                            </TextField>
+                            <TextField
+                                    fx:id="song_artist_text"
+                                    GridPane.columnIndex="0"
+                                    GridPane.rowIndex="1"
+                                    editable="false"
+                                    styleClass="bg_transparent"
+                                    style="
+                                        -fx-background-color: transparent;
+                                    -fx-border-width: 0 0 0 0;
+                                    -fx-border-radius: 0px;
+                                    -fx-border-color: transparent;"
+                                    minHeight="0"
+                            >
+                                <font>
+                                    <Font size="12"/>
+                                </font>
+                            </TextField>
+
+                        </GridPane>
+
+                    </GridPane>
+                </GridPane>
+
+            </GridPane>
+        </GridPane>
+    </GridPane>
+</GridPane>
