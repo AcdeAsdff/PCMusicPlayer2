@@ -1,0 +1,55 @@
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0' // Use the latest stable version
+    id "org.gradlex.extra-java-module-info" version "1.9"
+    id 'org.beryx.jlink' version '2.26.0'
+}
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+    google()
+    mavenLocal()
+    flatDir {
+        dirs "libs"
+    }
+}
+extraJavaModuleInfo {
+    module("jsr305-3.0.2.jar", "jsr305")
+    module("mp3agic-0.9.1.jar", "mp3agic")
+}
+dependencies {
+    // Regular dependencies (non-JavaFX) go here
+    implementation 'org.controlsfx:controlsfx:11.2.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    implementation("com.mpatric:mp3agic:0.9.1")
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")
+}
+javafx {
+    version = "23" // Specify your required JavaFX version
+    modules = [ 'javafx.controls', 'javafx.fxml' ,'javafx.media' ] // Define the modules you use
+}
+
+application {
+    mainModule = 'com.linearity.pcmusicplayer2'
+    mainClass = 'com.linearity.pcmusicplayer2.HelloApplication'
+    applicationDefaultJvmArgs = [
+            "-XX:+ShowCodeDetailsInExceptionMessages",
+            "-Dsun.java2d.opengl=true",
+            "-Dhttps.protocols=TLSv1.1,TLSv1.2",
+            "-Dsun.stdout.encoding=UTF-8",
+            "-Dsun.stderr.encoding=UTF-8"
+    ]
+
+}
+jlink {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'PCMusicPlayer2'
+    }
+    jpackage {
+        icon = "ic_launcher_round.ico"
+    }
+}
